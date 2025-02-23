@@ -42,8 +42,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function usersTimes(){
+    public function times(){
         return $this->hasMany(Dtr::class,'user_id');
     }
 }

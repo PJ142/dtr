@@ -29,7 +29,7 @@
 <div>
 
     <<div style="border: 3px solid black; padding: 10px; margin: 10px;">
-        <h2>Daily Time Records</h2>
+        <h2>Daily Time Records of {{ auth()->user()->name }}</h2>
         <table style="width: 100%; border-collapse: collapse; text-align: center;">
             <thead>
                 <tr style="background-color: #f2f2f2;">
@@ -79,11 +79,11 @@
         <th>Time Out PM</th>
     </tr>
     @foreach ($dtrs as $dtr)
-        <td>{{ $dtr->date ?? 'N/A' }}</td>
-        <td>{{ $dtr->time_in_am ?? 'N/A' }}</td>
-        <td>{{ $dtr->time_out_am ?? 'N/A' }}</td>
-        <td>{{ $dtr->time_in_pm ?? 'N/A' }}</td>
-        <td>{{ $dtr->time_out_pm ?? 'N/A' }}</td>
+        <td>{{$dtr['date'] }}</td>
+        <td>{{$dtr[time_in_am]}}</td>
+        <td>{{$dtr[time_out_am]}}</td>
+        <td>{{$dtr[time_in_pm]}}</td>
+        <td>{{ $dtr[time_out_pm]}}</td>
     @endforeach
 </table> --}}
 

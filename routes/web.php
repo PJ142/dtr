@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Dtr;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DTRController;
 use App\Http\Controllers\UserController;
@@ -17,13 +18,14 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    $dtrs = [];
-    if (auth()->check()){
-        $dtrs =auth()->user()->usersTimes()->latest()->get();
+    $dtr = [];
+
+    if (auth()->check()) {
+        $user = User::find(auth()->id());
+        $dtr = $user->times()->latest()->get();
     }
-    
-    // $dtrs = Dtr::where('user_id', auth()->id())->get();
-    return view('home',['dtrs' => $dtrs]);
+
+    return view('home', ['dtrs' => $dtr]);
 });
 
 Route::post ('/register', [UserController::class, 'register']);
@@ -33,3 +35,5 @@ Route::post ('/login', [UserController::class, 'login']);
 //DTR Routes
 Route::post ('/create-dtr',[DTRController::class, 'createDtr']);
 Route::get ('/edit/{dtr}',[DTRController::class,'edit']);
+Route::put ('/edit/{dtr}',[DTRController::class,'updateDtr']);
+Route::delete ('/delete/{dtr}',[DTRController::class,'deleteDtr']);
